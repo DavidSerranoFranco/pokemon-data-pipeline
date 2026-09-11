@@ -89,7 +89,7 @@ pokemon-pipeline/
 ### 1. Environment Setup
 Clone the repository and install dependencies:
 ```bash
-git clone https://github.com/your-username/pokemon-pipeline.git
+git clone https://github.com/DavidSerranoFranco/pokemon-data-pipeline.git
 cd pokemon-pipeline
 uv sync
 ```
@@ -115,7 +115,11 @@ Once the pipeline completes successfully, run the Streamlit app:
 ```bash
 uv run streamlit run streamlit_app.py
 ```
-Open `http://localhost:8501` to explore the interactive Pokémon analytics dashboard.
+Open `http://localhost:8501` to explore the interactive Pokémon analytics dashboard, or view the live deployment below:
+
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://pokemon-data-pipeline-yjj7vxsspimdh3zghrixvs.streamlit.app/)
+
+📊 **[Explore My Live Analytics Dashboard Here](https://pokemon-data-pipeline-yjj7vxsspimdh3zghrixvs.streamlit.app/)**
 
 ---
 
