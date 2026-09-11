@@ -5,6 +5,7 @@ description = "A production-grade, cloud-native ELT data pipeline extracting Pok
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
+    "db-dtypes>=1.7.1",
     "fsspec>=2026.4.0",
     "gcsfs>=2026.4.0",
     "google-cloud-bigquery>=3.42.0",
