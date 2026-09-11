@@ -1,0 +1,14 @@
+[project]
+name = "pokemon-pipeline"
+version = "1.0.0"
+description = "A production-grade, cloud-native ELT data pipeline extracting Pokémon data via API, orchestrating with Apache Airflow, storing in Google Cloud Storage, and transforming with dbt in BigQuery, featuring a Streamlit analytics dashboard."
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "fsspec>=2026.4.0",
+    "gcsfs>=2026.4.0",
+    "google-cloud-bigquery>=3.42.0",
+    "pandas>=3.0.3",
+    "polars>=1.41.2",
+    "requests>=2.34.2",
+]

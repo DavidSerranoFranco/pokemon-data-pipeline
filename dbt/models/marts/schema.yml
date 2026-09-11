@@ -1,0 +1,35 @@
+version: 2
+
+models:
+  - name: dim_pokemon
+    description: "Master Pokémon dimension table for BI and Streamlit consumption."
+    columns:
+      - name: pokemon_id
+        description: "Unique identifier for each Pokémon."
+        tests:
+          - unique
+          - not_null
+
+      - name: pokemon_name
+        description: "The name of the Pokémon."
+        tests:
+          - not_null
+      
+      - name: categorized_weight
+        description: "Categorized weight of the Pokémon (e.g., Light, Medium, Heavy)."
+        tests:
+          - accepted_values:
+              values: ['Light', 'Medium', 'Heavy']
+      
+  - name: fct_pokemon_stats
+    description: "Fact table containing Pokémon statistics for analysis."
+    columns:
+      - name: pokemon_id
+        description: "Foreign key linking to the Pokémon dimension table."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_pokemon')
+              field: pokemon_id
+
+      - name: size_index

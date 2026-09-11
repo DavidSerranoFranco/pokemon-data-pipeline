@@ -1,0 +1,12 @@
+# Airflow Dependencies
+polars>=1.7.1
+requests>=2.32.3
+fsspec>=2024.9.0
+
+# Google Cloud Dependencies
+gcsfs>=2024.9.0
+google-cloud-storage>=2.18.2
+
+# DBT Dependencies
+dbt-core>=1.7.13
+dbt-bigquery>=1.7.4
