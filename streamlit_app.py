@@ -21,16 +21,21 @@ st.set_page_config(
 @st.cach_resource
 def get_bigquery_client():
     """Create a BigQuery client using service account credentials."""
-    credentials_path = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
+    if hasattr(st, 'secrets') and 'gcp_service_account' in st.secrets:
+        credentials = service_account.Credentials.from_service_account_info(
+            st.secrets["gcp_service_account"],
+            scopes=["https://www.googleapis.com/auth/cloud-platform"]
+        )
+        return bigquery.Client(credentials=credentials)
 
+    credentials_path = os.getenv('GOOGLE_APPLICATION_CREDENTIALS')
     if credentials_path:
         credentials = service_account.Credentials.from_service_account_file(
             credentials_path,
-            scopes=["https://www.googleapis.com/auth/cloud-platform"],
+            scopes=["https://www.googleapis.com/auth/cloud-platform"]
         )
         return bigquery.Client(credentials=credentials)
     else:
-        # Use default credentials if no service account is provided
         return bigquery.Client()
 
 # Consult BigQuery+
