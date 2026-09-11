@@ -46,7 +46,6 @@ def load_pokemon_data():
     """Load Pokemon data from BigQuery."""
     client = get_bigquery_client()
 
-    # CORREGIDO: weight_g y peso_categoria coinciden con tu modelo dbt
     query = """
     SELECT
         pokemon_id,
@@ -55,7 +54,7 @@ def load_pokemon_data():
         weight_grams,
         types,
         abilities,
-        peso_categoria
+        categorized_weight
     FROM `inbound-theory-500201-u4.pokemon_dbt_dev.dim_pokemon`
     ORDER BY pokemon_id
     """
@@ -102,8 +101,8 @@ def main():
     # Weight category filter
     weight_filter = st.sidebar.multiselect(
         "Weight Category",
-        options=sorted(df_pokemon["peso_categoria"].dropna().unique()),
-        default=sorted(df_pokemon["peso_categoria"].dropna().unique())
+        options=sorted(df_pokemon["categorized_weight"].dropna().unique()),
+        default=sorted(df_pokemon["categorized_weight"].dropna().unique())
     )
 
     # Type filter (Robust extraction handling both strings and lists)
@@ -126,7 +125,7 @@ def main():
 
     # Apply filters
     df_filtered = df_pokemon[
-        df_pokemon["peso_categoria"].isin(weight_filter)
+        df_pokemon["categorized_weight"].isin(weight_filter)
     ].copy()
 
     if type_filter:
@@ -183,11 +182,13 @@ def main():
 
     with col2:
         st.subheader("🏋️ Distribution by Weight Category")
-        peso_counts = df_filtered["peso_categoria"].value_counts().reset_index()
-        peso_counts.columns = ["Category", "Count"]
+        categorized_weight_counts = df_filtered[
+            "categorized_weight"
+        ].value_counts().reset_index()
+        categorized_weight_counts.columns = ["Category", "Count"]
 
         st.bar_chart(
-            peso_counts.set_index("Category"),
+            categorized_weight_counts.set_index("Category"),
             use_container_width=True
         )
 
@@ -217,9 +218,9 @@ def main():
             "pokemon_id",
             "pokemon_name",
             "height_cm",
-            "weight_g",
+            "weight_grams",
             "types",
-            "peso_categoria"
+            "categorized_weight"
         ]],
         use_container_width=True,
         hide_index=True
