@@ -52,7 +52,7 @@ def load_pokemon_data():
         pokemon_id,
         pokemon_name,
         height_cm,
-        weight_g,
+        weight_grams,
         types,
         abilities,
         peso_categoria
@@ -73,7 +73,7 @@ def load_pokemon_stats():
         pokemon_id,
         pokemon_name,
         height_cm,
-        weight_g,
+        weight_grams,
         size_index
     FROM `inbound-theory-500201-u4.pokemon_dbt_dev.fct_pokemon_stats`
     ORDER BY size_index DESC
@@ -152,16 +152,16 @@ def main():
         st.metric(label="Avg Height (cm)", value=f"{avg_height:.1f}")
 
     with col3:
-        avg_weight = df_filtered["weight_g"].mean() / 100
+        avg_weight = df_filtered["weight_grams"].mean() / 1000
         st.metric(label="Avg Weight (kg)", value=f"{avg_weight:.1f}")
 
     with col4:
         if not df_filtered.empty:
-            heaviest = df_filtered.loc[df_filtered["weight_g"].idxmax()]
+            heaviest = df_filtered.loc[df_filtered["weight_grams"].idxmax()]
             st.metric(
                 label="Heaviest Pokémon",
                 value=heaviest["pokemon_name"].title(),
-                delta=f"{heaviest['weight_g']/100:.1f} kg"
+                delta=f"{heaviest['weight_grams']/1000:.1f} kg"
             )
         else:
             st.metric(label="Heaviest Pokémon", value="N/A")
@@ -176,7 +176,7 @@ def main():
         st.scatter_chart(
             df_filtered,
             x="height_cm",
-            y="weight_g",
+            y="weight_grams",
             use_container_width=True
         )
         st.caption("Each point represents a Pokémon")
@@ -203,7 +203,7 @@ def main():
     top_10 = df_stats_filtered.head(10)
 
     st.dataframe(
-        top_10[["pokemon_name", "height_cm", "weight_g", "size_index"]],
+        top_10[["pokemon_name", "height_cm", "weight_grams", "size_index"]],
         use_container_width=True,
         hide_index=True
     )
