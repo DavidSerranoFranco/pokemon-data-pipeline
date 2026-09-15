@@ -10,7 +10,7 @@ A production-grade, cloud-native **ELT (Extract, Load, Transform)** data pipelin
 
 ---
 
-## 🏗️ Architecture Overview
+## Architecture Overview
 
 This pipeline follows the **Medallion Architecture** (Bronze, Silver, Gold) to ensure data quality, scalability, and decoupled design.
 
@@ -25,14 +25,14 @@ graph LR
     G -.->|Orchestrates| D
 ```
 
-### 🏅 The Medallion Layers
-*   **🥉 Bronze (Raw):** Raw JSON data extracted from the API and saved as partitioned `.parquet` files in Google Cloud Storage (GCS).
-*   **🥈 Silver (Staging):** Cleaned, typed, and standardized data. Handled by dbt `stg_` models reading directly from the GCS External Table.
-*   **🥇 Gold (Marts):** Business-ready, modeled data following a Star Schema (`dim_pokemon`, `fct_pokemon_stats`), optimized for fast querying by the BI layer.
+### The Medallion Layers
+*   **Bronze (Raw):** Raw JSON data extracted from the API and saved as partitioned `.parquet` files in Google Cloud Storage (GCS).
+*   **Silver (Staging):** Cleaned, typed, and standardized data. Handled by dbt `stg_` models reading directly from the GCS External Table.
+*   **Gold (Marts):** Business-ready, modeled data following a Star Schema (`dim_pokemon`, `fct_pokemon_stats`), optimized for fast querying by the BI layer.
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Category | Technologies |
 | :--- | :--- |
@@ -45,7 +45,7 @@ graph LR
 
 ---
 
-## ✨ Key Features & Senior Best Practices
+## Key Features & Senior Best Practices
 
 *   **Decoupled Architecture:** Python handles extraction and GCS loading only. Heavy transformations are delegated to BigQuery via dbt, preventing memory bottlenecks in Airflow.
 *   **Zero-Copy Data Ingestion:** Utilizes BigQuery External Tables to query Parquet files directly from GCS without duplicating storage.
@@ -55,7 +55,7 @@ graph LR
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```text
 pokemon-pipeline/
@@ -78,7 +78,7 @@ pokemon-pipeline/
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 *   Docker & Docker Compose
@@ -119,11 +119,11 @@ Open `http://localhost:8501` to explore the interactive Pokémon analytics dashb
 
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://pokemon-data-pipeline-yjj7vxsspimdh3zghrixvs.streamlit.app/)
 
-📊 **[Explore My Live Analytics Dashboard Here](https://pokemon-data-pipeline-yjj7vxsspimdh3zghrixvs.streamlit.app/)**
+**[Explore My Live Analytics Dashboard Here](https://pokemon-data-pipeline-yjj7vxsspimdh3zghrixvs.streamlit.app/)**
 
 ---
 
-## 🔮 Future Enhancements
+## Future Enhancements
 *   Implement dbt incremental models for efficient daily updates.
 *   Add CI/CD pipelines (GitHub Actions) to run `dbt test` on pull requests.
 *   Expand the API extraction to include battle stats, moves, and evolution chains.
@@ -133,7 +133,7 @@ Open `http://localhost:8501` to explore the interactive Pokémon analytics dashb
 
 <br>
 <p align="center">
-  <i>Engineered with precision, scalability, and a passion for data. ⚡</i>
+  <i>Engineered with precision, scalability, and a passion for data.</i>
 </p>
 
 <p align="center">
